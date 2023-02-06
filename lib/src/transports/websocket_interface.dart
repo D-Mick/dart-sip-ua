@@ -7,12 +7,9 @@ import 'websocket_dart_impl.dart'
     if (dart.library.js) 'websocket_web_impl.dart';
 
 class WebSocketInterface implements Socket {
-  final int _messageDelay;
-
-  WebSocketInterface(String url,
-      {required int messageDelay, WebSocketSettings? webSocketSettings})
-      : _messageDelay = messageDelay {
-    logger.d('new() [url:$url]');
+  final int _messageDelay = 0;
+  WebSocketInterface(String url, int messageDelay, [WebSocketSettings? webSocketSettings]) {
+    logger.d('new() [url:' + url + ']');
     _url = url;
     dynamic parsed_url = Grammar.parse(url, 'absoluteURI');
     if (parsed_url == -1) {
@@ -23,7 +20,7 @@ class WebSocketInterface implements Socket {
       throw AssertionError('Invalid argument: $url');
     } else {
       String transport_scheme = webSocketSettings != null &&
-              webSocketSettings.transport_scheme != null
+          webSocketSettings.transport_scheme != null
           ? webSocketSettings.transport_scheme!.toLowerCase()
           : parsed_url.scheme;
 

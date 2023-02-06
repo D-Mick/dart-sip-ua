@@ -58,6 +58,7 @@ class WebSocketImpl {
   void send(dynamic data) async {
     if (_socket != null) {
       queue.add(data);
+      logger.d('send: \n\n$data');
     }
   }
 
